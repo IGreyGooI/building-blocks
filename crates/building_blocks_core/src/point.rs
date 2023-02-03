@@ -176,3 +176,17 @@ where
         *self == Self::zero()
     }
 }
+
+// impl<N> Deref for PointN<N> {
+//     type Target = N;
+
+//     fn deref(&self) -> &Self::Target {
+//         &self.0
+//     }
+// }
+
+// impl<N> DerefMut for PointN<N> {
+//     fn deref_mut(&mut self) -> &mut Self::Target {
+//         &mut self.0
+//     }
+// }

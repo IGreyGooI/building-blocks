@@ -5,7 +5,11 @@ use super::{point_traits::*, Point2, PointN};
 use core::ops::{Add, BitAnd, BitOr, BitXor, Div, Mul, Not, Range, Rem, Shl, Shr, Sub};
 use itertools::{iproduct, ConsTuples, Product};
 use num::{traits::Pow, Integer, Signed};
-use std::cmp::Ordering;
+use std::{
+    cmp::Ordering,
+    fmt::Debug,
+    ops::{Deref, DerefMut},
+};
 
 /// A 3-dimensional point with scalar type `T`.
 pub type Point3<T> = PointN<[T; 3]>;
@@ -15,6 +19,11 @@ pub type Point3i = Point3<i32>;
 pub type Point3f = Point3<f32>;
 
 impl<T> Point3<T> {
+    #[inline]
+    pub fn new(x: T, y: T, z: T) -> Self {
+        PointN([x, y, z])
+    }
+
     #[inline]
     pub fn x_mut(&mut self) -> &mut T {
         &mut self.0[0]
@@ -479,6 +488,52 @@ impl From<Point3i> for Point3f {
     #[inline]
     fn from(p: Point3i) -> Self {
         PointN([p.x() as f32, p.y() as f32, p.z() as f32])
+    }
+}
+
+impl From<[i32; 3]> for Point3i {
+    #[inline]
+    fn from(p: [i32; 3]) -> Self {
+        PointN([p[0], p[1], p[2]])
+    }
+}
+
+impl<T: Debug + Clone + PartialEq + 'static> Deref for Point3<T> {
+    type Target = XYZ<T>;
+
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*(self as *const Self as *const Self::Target) }
+    }
+}
+
+impl<T: Debug + Clone + PartialEq + 'static> DerefMut for Point3<T> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        unsafe { &mut *(self as *mut Self as *mut Self::Target) }
+    }
+}
+
+#[doc = " Data structure used to provide access to [`Point3<T>`] with the dot"]
+#[doc = " notation, e.g., `p.x` is the same as `p[0]` for a vector."]
+#[repr(C)]
+#[derive(Eq, PartialEq, Clone, Hash, Debug, Copy)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct XYZ<T> {
+    pub x: T,
+    pub y: T,
+    pub z: T,
+}
+
+impl<T> Deref for XYZ<T> {
+    type Target = [T; 3];
+
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*(self as *const Self as *const Self::Target) }
+    }
+}
+
+impl<T> DerefMut for XYZ<T> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        unsafe { &mut *(self as *mut Self as *mut Self::Target) }
     }
 }
 

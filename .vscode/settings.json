@@ -7,7 +7,6 @@
         "mesh",
         "mint",
         "nalgebra",
-        "ncollide",
         "sdfu"
     ],
     "files.eol": "\n"

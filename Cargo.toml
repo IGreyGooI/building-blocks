@@ -17,11 +17,11 @@ release = { lto = "thin" }
 bench = { lto = "thin" }
 
 [features]
-default = ["lz4", "mesh", "sdfu", "search", "sled"]
+default = ["lz4", "mesh", "sdfu", "sled"]
 
 # Optional crates.
 mesh = ["building_blocks_mesh"]
-search = ["building_blocks_search"]
+# search = ["building_blocks_search"]
 
 # Integrations.
 dot_vox = ["building_blocks_storage/dot_vox"]
@@ -43,7 +43,7 @@ lz4 = ["building_blocks_storage/lz4"]
 snappy = ["building_blocks_storage/snap"]
 
 # Collisions with `OctreeSet` and `OctreeDBVT`.
-ncollide = ["building_blocks_search/ncollide"]
+# ncollide = ["building_blocks_search/ncollide"]
 
 [workspace]
 members = ["crates/*"]
@@ -57,7 +57,7 @@ building_blocks_storage = { path = "crates/building_blocks_storage", version = "
 
 # Optional, feature-gated
 building_blocks_mesh = { path = "crates/building_blocks_mesh", version = "0.7.0", default-features = false, optional = true }
-building_blocks_search = { path = "crates/building_blocks_search", version = "0.7.0", default-features = false, optional = true }
+# building_blocks_search = { path = "crates/building_blocks_search", version = "0.7.0", default-features = false, optional = true }
 
 [dev-dependencies]
 utilities = { path = "crates/utilities" }
