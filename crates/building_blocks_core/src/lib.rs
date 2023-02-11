@@ -16,6 +16,9 @@ mod orthant;
 mod point;
 mod sphere;
 
+#[cfg(feature = "bevy_reflect")]
+mod reflect;
+
 pub use axis::*;
 pub use extent::*;
 pub use morton::*;
@@ -24,8 +27,8 @@ pub use point::*;
 pub use sphere::*;
 
 pub use bytemuck;
-pub use num;
 pub use itertools;
+pub use num;
 
 #[doc(hidden)]
 pub mod prelude {
