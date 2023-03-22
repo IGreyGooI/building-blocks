@@ -69,6 +69,19 @@ impl<N> ExtentN<N> {
     }
 }
 
+impl<N> Default for ExtentN<N>
+where
+    PointN<N>: Default,
+{
+    #[inline]
+    fn default() -> Self {
+        Self {
+            minimum: PointN::default(),
+            shape: PointN::default(),
+        }
+    }
+}
+
 impl<N> ExtentN<N>
 where
     PointN<N>: Point,
