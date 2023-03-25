@@ -24,7 +24,7 @@ num = "0.4"
 # Optional, feature-gated.
 bevy_reflect = {path = "../../../bevy/crates/bevy_reflect", optional = true}
 cgmath = {version = "0.18", optional = true}
-glam = {version = "0.22", optional = true}
+glam = {version = "0.23", optional = true}
 mint = {version = "0.5.0", optional = true}
 nalgebra = {version = "0.32", optional = true}
 sdfu = {version = "0.3", optional = true}
